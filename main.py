@@ -34,7 +34,7 @@ def bubble_sort(arr):
 # TIME FUNCTION(S)
 # ===========================================================
 
-# NOTE TO SELFE: 
+# NOTE: main -> timefunc -> sortAlg ; abstraction from main, to the timefunc, to each type of algo;
 
 # main
 if __name__ == "__main__":
