@@ -5,7 +5,7 @@ Python v3.12
 
 # Reference
 ## Branches
-- Dev1: Erik's working branch
+- Dev1: Development Branch
     - time_func: branch for working on time function
 
 # Objective
