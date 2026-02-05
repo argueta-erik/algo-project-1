@@ -1,14 +1,10 @@
 import time     # import time module to measure duration functions
 from numpy import random   # import random module to genarate random input data for the algorithms
 
-# ===============
-# Time Functions
-# ===============
+# ============================================================
+# SORTING ALGORITHMS
+# ============================================================
 
-
-# ============
-# Bubble Sort
-# ============
 def bubble_sort(arr):
     n = len(arr)
     for i in range(n - 1):
@@ -34,6 +30,11 @@ def bubble_sort(arr):
 # ==============
 
 
+# ===========================================================
+# TIME FUNCTION(S)
+# ===========================================================
+
+# NOTE TO SELFE: 
 
 # main
 if __name__ == "__main__":
