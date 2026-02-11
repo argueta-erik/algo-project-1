@@ -61,7 +61,7 @@ def radix_sort(arr):
     while max_num // exp > 0:
         counting_sort_radix(arr, exp)
         exp *= 10
-        return arr
+    return arr
 
 # counting_sort_radix
 def counting_sort_radix(arr, exp):
