@@ -112,4 +112,4 @@ if __name__ == "__main__":
     # print ("Radix Sort:", radix_sort(test_arr.copy()))
 
     # Printing Time Function
-    print(f" Time: ", time_function(bubble_sort, test_arr.copy()))
+    # print(f" Time: ", time_function(bubble_sort, test_arr.copy()))
