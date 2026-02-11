@@ -1,10 +1,28 @@
 import time     # import time module to measure duration functions
 import random   # import random module to genarate random input data for the algorithms
 
+#==================
+# Driver Function
+# =================
+def printout(fn, arr):
+    sorted_array = arr.copy()
+    timestamp = time_function(fn, sorted_array)
+
+    print("Sorting Algorithm: Bubble Sort")
+    print("Original Array: ", arr)
+    print("Sorted Array: ", sorted_array)
+    print(f"Total Time:  {timestamp:.7f} seconds\n\n")
+
+
 # ===============
 # Time Functions
 # ===============
+def time_function(fn, arr):
+    start = time.perf_counter()
+    fn(arr)
+    end = time.perf_counter()
 
+    return (end - start)
 
 # ============
 # Bubble Sort
@@ -100,8 +118,12 @@ def linear_search(arr, target):
 if __name__ == "__main__":
     test_arr = [64, 34, 25, 12, 22, 11, 90, 5, 22, 11]
 
-    print("Unsorted Array:", test_arr)
-    print("Bubble Sort:", bubble_sort(test_arr.copy()))
-    print("Merge Sort:", merge_sort(test_arr.copy()))
-    print("Linear Search for 22:", linear_search(test_arr.copy(), 22))
-    print ("Radix Sort:", radix_sort(test_arr.copy()))
+    # print("Unsorted Array:", test_arr)
+    # print("Bubble Sort:", bubble_sort(test_arr.copy()))
+    # print("Merge Sort:", merge_sort(test_arr.copy()))
+    # print("Linear Search for 22:", linear_search(test_arr.copy(), 22))
+    # print ("Radix Sort:", radix_sort(test_arr.copy()))
+
+    # printout(bubble_sort, test_arr)
+    printout(merge_sort, test_arr.copy())
+    print(merge_sort(test_arr.copy()))
