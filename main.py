@@ -1,21 +1,52 @@
 import time     # import time module to measure duration functions
-from numpy import random   # import random module to genarate random input data for the algorithms
+import random   # import random module to genarate random input data for the algorithms
 
-# ============================================================
-# SORTING ALGORITHMS
-# ============================================================
+# ===============
+# Time Functions
+# ===============
 
+
+# ============
+# Bubble Sort
+# ============
 def bubble_sort(arr):
     n = len(arr)
-    for i in range(n - 1):
-        for j in range(0, n - i - 1):
+    # n-1 to fit within the size of the array due to indices
+    for i in range(n-1):
+        for j in range(0, n-i-1):
             if arr[j] > arr[j + 1]:
-                arr[j], arr[j+1] = arr[j + 1], arr[j]
+                arr[j], arr[j+1] = arr[j+1], arr[j] # swapping the value of the index
     return arr
 
 # ============
 # Merge Sort
 # ============
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    mid = len(arr) // 2     # Divide and Conquer
+    left = merge_sort(arr[:mid])    # array from left to the midpoint
+    right = merge_sort(arr[mid:])   # array from right to the midpoint
+
+    return merge(left, right)
+
+def merge(left, right):
+    result = []
+    i = j = 0
+    
+    # comparing both halves and merge
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i += 1
+        else: 
+            result.append(right[j])
+            j += 1
+
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+
 
 # ============
 # Quick Sort
@@ -24,23 +55,53 @@ def bubble_sort(arr):
 # ============
 # Radix Sort
 # ============
+def radix_sort(arr):
+    max_num = max(arr)
+    exp = 1
+    while max_num // exp > 0:
+        counting_sort_radix(arr, exp)
+        exp *= 10
+        return arr
+
+# counting_sort_radix
+def counting_sort_radix(arr, exp):
+    n = len(arr)
+    output = [0] * n
+    count = [0] * 10    # hard coding the index values
+
+    for i in range(n):
+        digit = (arr[i] // exp) % 10
+        count[digit] += 1
+
+    for i in range(1, 10):
+        count[i] += count[i-1]
+
+    i = n - 1
+    while i >= 0:
+        digit = (arr[i] // exp) % 10
+        output[count[digit] - 1] = arr[i]
+        count[digit] -= 1
+        i -= 1
+
+    for i in range(n):
+        arr[i] = output[i]
 
 # ==============
 # Linear Search
 # ==============
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i 
+    return -1
 
-
-# ===========================================================
-# TIME FUNCTION(S)
-# ===========================================================
-
-# NOTE: main -> timefunc -> sortAlg ; abstraction from main, to the timefunc, to each type of algo;
 
 # main
 if __name__ == "__main__":
-    test_arr = [10, 8, 9, 1, 6, 3, 7]
-    test_ran_arr = random.randint(10, size=(7))
+    test_arr = [64, 34, 25, 12, 22, 11, 90, 5, 22, 11]
 
     print("Unsorted Array:", test_arr)
-    print ("Unsorted Random Array:", test_ran_arr)
-    print("Bubble Sort:", bubble_sort(test_ran_arr))
+    print("Bubble Sort:", bubble_sort(test_arr.copy()))
+    print("Merge Sort:", merge_sort(test_arr.copy()))
+    print("Linear Search for 22:", linear_search(test_arr.copy(), 22))
+    print ("Radix Sort:", radix_sort(test_arr.copy()))
