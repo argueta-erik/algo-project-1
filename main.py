@@ -1,6 +1,29 @@
 import time     # import time module to measure duration functions
 import random   # import random module to genarate random input data for the algorithms
 
+
+# =======
+# Driver
+# =======
+def test_driver(arr, fn=None):
+
+    print("Unsorted Array: ", arr)
+
+    # Bubble Sort
+    print("Bubble Sort Algorithm")
+    time_bubble = time_function(bubble_sort, arr)
+    sorted_bubble = bubble_sort(arr)
+    print(f"Sorted Array: {sorted_bubble}")
+    print(f"Time Elapsed: {time_bubble: .8f} seconds.")
+
+    # Merge Sort
+
+    # Radix Sort
+
+    # Linear Search
+
+
+
 # ===============
 # Time Function
 # ===============
@@ -103,6 +126,7 @@ def linear_search(arr, target):
 # main
 if __name__ == "__main__":
     test_arr = [64, 34, 25, 12, 22, 11, 90, 5, 22, 11]
+    # entity square was same size array
 
     # Basic Printing of Algorithms
     # print("Unsorted Array:", test_arr)
@@ -113,3 +137,5 @@ if __name__ == "__main__":
 
     # Printing Time Function
     # print(f" Time: ", time_function(bubble_sort, test_arr.copy()))
+
+    test_driver(test_arr)
