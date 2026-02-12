@@ -5,32 +5,60 @@ import random   # import random module to genarate random input data for the alg
 # =======
 # Driver
 # =======
-def test_driver(arr, fn=None):
-
-    print("Unsorted Array: ", arr)
+def perform_bubble_sort(arr):
 
     # Bubble Sort
     print("Bubble Sort Algorithm")
     time_bubble = time_function(bubble_sort, arr)
     sorted_bubble = bubble_sort(arr)
+    print("Unsorted Array: ", arr)
     print(f"Sorted Array: {sorted_bubble}")
     print(f"Time Elapsed: {time_bubble: .8f} seconds.")
 
+def perform_merge_sort(arr):
+
     # Merge Sort
+    print("\n\nMerge Sort Algorithm")
+    time_merge = time_function(merge_sort, arr)
+    sorted_merge = merge_sort(arr)
+    print("Unsorted Array: ", arr)
+    print(f"Sorted Array: {sorted_merge}")
+    print(f"Time Elapsed: {time_merge: .8f} seconds.")
+
+
+def perform_radix_sort(arr):
 
     # Radix Sort
+    print("\n\nRadix Sort Algorithm")
+    time_radix = time_function(radix_sort, arr)
+    sorted_radix = radix_sort(arr)
+    print("Unsorted Array: ", arr)
+    print(f"Sorted Array: {sorted_radix}")
+    print(f"Time Elapsed: {time_radix: .8f} seconds.")
+
+def perform_linear_search(arr):
 
     # Linear Search
-
+    print("\n\nLinear Search Algorithm")
+    print("Given Array: ", arr)
+    target = input("Please enter a number from the array: \n> ")
+    time_linear = time_function(linear_search, arr, target)
+    print(f"Time Elapsed: {time_linear: .8f} seconds.")
 
 
 # ===============
 # Time Function
 # ===============
-def time_function(fn, arr):
-    start = time.perf_counter()
-    fn(arr)
-    end = time.perf_counter()
+def time_function(fn, arr, target=None):
+
+    if (target == None):
+        start = time.perf_counter()
+        fn(arr)
+        end = time.perf_counter()
+    else:
+        start = time.perf_counter()
+        fn(arr, target)
+        end = time.perf_counter()
 
     return (end - start)
 
@@ -126,16 +154,8 @@ def linear_search(arr, target):
 # main
 if __name__ == "__main__":
     test_arr = [64, 34, 25, 12, 22, 11, 90, 5, 22, 11]
-    # entity square was same size array
 
-    # Basic Printing of Algorithms
-    # print("Unsorted Array:", test_arr)
-    # print("Bubble Sort:", bubble_sort(test_arr.copy()))
-    # print("Merge Sort:", merge_sort(test_arr.copy()))
-    # print("Linear Search for 22:", linear_search(test_arr.copy(), 22))
-    # print ("Radix Sort:", radix_sort(test_arr.copy()))
-
-    # Printing Time Function
-    # print(f" Time: ", time_function(bubble_sort, test_arr.copy()))
-
-    test_driver(test_arr)
+    perform_bubble_sort(test_arr.copy())
+    perform_merge_sort(test_arr.copy())
+    perform_radix_sort(test_arr.copy())
+    perform_linear_search(test_arr.copy())
