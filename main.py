@@ -6,28 +6,36 @@ import random   # import random module to genarate random input data for the alg
 # Driver
 # =======
 def perform_bubble_sort(arr):
-
     # Bubble Sort
     print("Bubble Sort Algorithm")
+    print("Unsorted Array: ", arr)
     time_bubble = time_function(bubble_sort, arr)
     sorted_bubble = bubble_sort(arr)
-    print("Unsorted Array: ", arr)
     print(f"Sorted Array: {sorted_bubble}")
     print(f"Time Elapsed: {time_bubble: .8f} seconds.")
 
-def perform_merge_sort(arr):
 
+def perform_merge_sort(arr):
     # Merge Sort
     print("\n\nMerge Sort Algorithm")
+    print("Unsorted Array: ", arr)
     time_merge = time_function(merge_sort, arr)
     sorted_merge = merge_sort(arr)
-    print("Unsorted Array: ", arr)
     print(f"Sorted Array: {sorted_merge}")
     print(f"Time Elapsed: {time_merge: .8f} seconds.")
 
 
-def perform_radix_sort(arr):
+def perform_quick_sort(arr):
+    print("\n\nQuick Sort Algorithm")
+    print("Unsorted Array: ", arr)
+    time_quick = time_function(quick_sort, arr)
+    sorted_quick = quick_sort(arr)
+    print(f"Sorted Array: {sorted_quick}")
+    print(f"Time Elapsed: {time_quick: .8f} seconds.")
 
+
+
+def perform_radix_sort(arr):
     # Radix Sort
     print("\n\nRadix Sort Algorithm")
     time_radix = time_function(radix_sort, arr)
@@ -36,8 +44,8 @@ def perform_radix_sort(arr):
     print(f"Sorted Array: {sorted_radix}")
     print(f"Time Elapsed: {time_radix: .8f} seconds.")
 
-def perform_linear_search(arr):
 
+def perform_linear_search(arr):
     # Linear Search
     print("\n\nLinear Search Algorithm")
     print("Given Array: ", arr)
@@ -106,6 +114,23 @@ def merge(left, right):
 # ============
 # Quick Sort
 # ============
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    else:
+        pivot = random.choice(arr)
+        LT = []
+        EQ = []
+        GT = []
+
+        for _ in arr:
+            if _ < pivot:
+                LT.append(_)
+            elif _ == pivot:
+                EQ.append(_)
+            else:
+                GT.append(_)
+        return quick_sort(LT) + EQ + quick_sort(GT)
 
 # ============
 # Radix Sort
@@ -157,5 +182,8 @@ if __name__ == "__main__":
 
     perform_bubble_sort(test_arr.copy())
     perform_merge_sort(test_arr.copy())
+    perform_quick_sort(test_arr.copy())
     perform_radix_sort(test_arr.copy())
-    perform_linear_search(test_arr.copy())
+    # perform_linear_search(test_arr.copy())    # Linear Search is not outputting the index!
+
+    
