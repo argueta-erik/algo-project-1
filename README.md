@@ -7,6 +7,7 @@ Python v3.12
 ## Branches
 - Dev: Development Branch
 - driver: driver function to run the algorithms and print
+- visuals: dedicated to creating visuals via Pygame
 
 ## To-Do:
 [] Add any appropriate comments to the main.py
