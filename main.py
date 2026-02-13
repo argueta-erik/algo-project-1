@@ -184,10 +184,10 @@ def perform_linear_search(arr):
 if __name__ == "__main__":
     test_arr = [64, 34, 25, 12, 22, 11, 90, 5, 22, 11]
 
-    perform_bubble_sort(test_arr.copy())
-    perform_merge_sort(test_arr.copy())
-    perform_quick_sort(test_arr.copy())
-    perform_radix_sort(test_arr.copy())
-    perform_linear_search(test_arr.copy())    # Linear Search is not outputting the index!
+    # perform_bubble_sort(test_arr.copy())
+    # perform_merge_sort(test_arr.copy())
+    # perform_quick_sort(test_arr.copy())
+    # perform_radix_sort(test_arr.copy())
+    # perform_linear_search(test_arr.copy())
 
     
