@@ -18,7 +18,19 @@ while running:
     screen.fill("gray")
 
     # RENDER YOUR GAME HERE
-    pygame.draw.rect(screen, "black", (300, 100, 200, 100), 3)
+    
+    # Rulers for Reference
+    pygame.draw.line(screen, "red", (640, 0), (640, 720), 1)    # 1/4 Line
+    pygame.draw.line(screen, "red", (320, 0), (320, 720), 1)    # 1/2 Line
+    pygame.draw.line(screen, "red", (960, 0), (960, 720), 1) # 3/4 Line
+    
+    # Canvas for the Sorting Visualization
+    pygame.draw.rect(screen, "black", (660, 50, 600, 320), 3)
+    pygame.draw.rect(screen, "black", (935, 390, 50, 50), 3)    # Play Button
+    pygame.draw.rect(screen, "black", (1000, 390, 75, 50), 3)    # FFWD Button
+    pygame.draw.rect(screen, "black", (845, 390, 75, 50), 3)    # RWND Button
+
+    
 
     # flip() the display to put your work on screen
     pygame.display.flip()
