@@ -187,6 +187,6 @@ if __name__ == "__main__":
     perform_merge_sort(test_arr.copy())
     perform_quick_sort(test_arr.copy())
     perform_radix_sort(test_arr.copy())
-    perform_linear_search(test_arr.copy())    # Linear Search is not outputting the index!
+    perform_linear_search(test_arr.copy())
 
     
