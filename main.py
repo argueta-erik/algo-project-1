@@ -38,9 +38,9 @@ def perform_quick_sort(arr):
 def perform_radix_sort(arr):
     # Radix Sort
     print("\n\nRadix Sort Algorithm")
+    print("Unsorted Array: ", arr)
     time_radix = time_function(radix_sort, arr)
     sorted_radix = radix_sort(arr)
-    print("Unsorted Array: ", arr)
     print(f"Sorted Array: {sorted_radix}")
     print(f"Time Elapsed: {time_radix: .8f} seconds.")
 
@@ -49,8 +49,12 @@ def perform_linear_search(arr):
     # Linear Search
     print("\n\nLinear Search Algorithm")
     print("Given Array: ", arr)
-    target = input("Please enter a number from the array: \n> ")
-    time_linear = time_function(linear_search, arr, target)
+    target = int(input("Please enter a number from the array: \n> "))
+    start = time.perf_counter()
+    index = linear_search(arr, target)
+    end = time.perf_counter()
+    time_linear = end - start
+    print(f"{target} was located at index: {index}.")
     print(f"Time Elapsed: {time_linear: .8f} seconds.")
 
 
@@ -184,6 +188,6 @@ if __name__ == "__main__":
     perform_merge_sort(test_arr.copy())
     perform_quick_sort(test_arr.copy())
     perform_radix_sort(test_arr.copy())
-    # perform_linear_search(test_arr.copy())    # Linear Search is not outputting the index!
+    perform_linear_search(test_arr.copy())    # Linear Search is not outputting the index!
 
     
