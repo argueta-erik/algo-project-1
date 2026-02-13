@@ -8,6 +8,12 @@ Python v3.12
 - Dev: Development Branch
 - driver: driver function to run the algorithms and print
 
+## To-Do:
+[] Add any appropriate comments to the main.py
+[] Create visualization for project
+[] Create Video Presentation
+[] Create PowerPoint Presentation
+
 # Objective
 This project aims to deepen students’ understanding of sorting algorithms by implementing, analyzing, and visualizing the performance of various sorting techniques in Python. Students will gain practical experience in algorithm implementation, performance analysis, and the use of visual aids to demonstrate complex concepts.​
 

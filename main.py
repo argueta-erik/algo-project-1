@@ -1,63 +1,6 @@
 import time     # import time module to measure duration functions
 import random   # import random module to genarate random input data for the algorithms
 
-
-# =======
-# Driver
-# =======
-def perform_bubble_sort(arr):
-    # Bubble Sort
-    print("Bubble Sort Algorithm")
-    print("Unsorted Array: ", arr)
-    time_bubble = time_function(bubble_sort, arr)
-    sorted_bubble = bubble_sort(arr)
-    print(f"Sorted Array: {sorted_bubble}")
-    print(f"Time Elapsed: {time_bubble: .8f} seconds.")
-
-
-def perform_merge_sort(arr):
-    # Merge Sort
-    print("\n\nMerge Sort Algorithm")
-    print("Unsorted Array: ", arr)
-    time_merge = time_function(merge_sort, arr)
-    sorted_merge = merge_sort(arr)
-    print(f"Sorted Array: {sorted_merge}")
-    print(f"Time Elapsed: {time_merge: .8f} seconds.")
-
-
-def perform_quick_sort(arr):
-    print("\n\nQuick Sort Algorithm")
-    print("Unsorted Array: ", arr)
-    time_quick = time_function(quick_sort, arr)
-    sorted_quick = quick_sort(arr)
-    print(f"Sorted Array: {sorted_quick}")
-    print(f"Time Elapsed: {time_quick: .8f} seconds.")
-
-
-
-def perform_radix_sort(arr):
-    # Radix Sort
-    print("\n\nRadix Sort Algorithm")
-    print("Unsorted Array: ", arr)
-    time_radix = time_function(radix_sort, arr)
-    sorted_radix = radix_sort(arr)
-    print(f"Sorted Array: {sorted_radix}")
-    print(f"Time Elapsed: {time_radix: .8f} seconds.")
-
-
-def perform_linear_search(arr):
-    # Linear Search
-    print("\n\nLinear Search Algorithm")
-    print("Given Array: ", arr)
-    target = int(input("Please enter a number from the array: \n> "))
-    start = time.perf_counter()
-    index = linear_search(arr, target)
-    end = time.perf_counter()
-    time_linear = end - start
-    print(f"{target} was located at index: {index}.")
-    print(f"Time Elapsed: {time_linear: .8f} seconds.")
-
-
 # ===============
 # Time Function
 # ===============
@@ -178,6 +121,62 @@ def linear_search(arr, target):
         if arr[i] == target:
             return i 
     return -1
+
+
+# =======
+# Driver
+# =======
+def perform_bubble_sort(arr):
+    # Bubble Sort
+    print("Bubble Sort Algorithm")
+    print("Unsorted Array: ", arr)
+    time_bubble = time_function(bubble_sort, arr)
+    sorted_bubble = bubble_sort(arr)
+    print(f"Sorted Array: {sorted_bubble}")
+    print(f"Time Elapsed: {time_bubble: .8f} seconds.")
+
+
+def perform_merge_sort(arr):
+    # Merge Sort
+    print("\n\nMerge Sort Algorithm")
+    print("Unsorted Array: ", arr)
+    time_merge = time_function(merge_sort, arr)
+    sorted_merge = merge_sort(arr)
+    print(f"Sorted Array: {sorted_merge}")
+    print(f"Time Elapsed: {time_merge: .8f} seconds.")
+
+
+def perform_quick_sort(arr):
+    print("\n\nQuick Sort Algorithm")
+    print("Unsorted Array: ", arr)
+    time_quick = time_function(quick_sort, arr)
+    sorted_quick = quick_sort(arr)
+    print(f"Sorted Array: {sorted_quick}")
+    print(f"Time Elapsed: {time_quick: .8f} seconds.")
+
+
+
+def perform_radix_sort(arr):
+    # Radix Sort
+    print("\n\nRadix Sort Algorithm")
+    print("Unsorted Array: ", arr)
+    time_radix = time_function(radix_sort, arr)
+    sorted_radix = radix_sort(arr)
+    print(f"Sorted Array: {sorted_radix}")
+    print(f"Time Elapsed: {time_radix: .8f} seconds.")
+
+
+def perform_linear_search(arr):
+    # Linear Search
+    print("\n\nLinear Search Algorithm")
+    print("Given Array: ", arr)
+    target = int(input("Please enter a number from the array: \n> "))
+    start = time.perf_counter()
+    index = linear_search(arr, target)
+    end = time.perf_counter()
+    time_linear = end - start
+    print(f"{target} was located at index: {index}.")
+    print(f"Time Elapsed: {time_linear: .8f} seconds.")
 
 
 # main
