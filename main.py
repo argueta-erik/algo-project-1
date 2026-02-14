@@ -163,7 +163,6 @@ def perform_quick_sort(arr, debug):
     print(f"Time Elapsed: {time_quick: .8f} seconds.")
 
 
-
 def perform_radix_sort(arr, debug):
     # Radix Sort
     print("\n\nRadix Sort Algorithm")

@@ -1,6 +1,8 @@
 # Example file showing a basic pygame "game loop"
 import pygame
-
+import pygame_widgets
+from pygame_widgets.button import Button 
+from pygame_widgets.textbox import TextBox
 
 # Function defining the lines and rulers for reference
 def reference_lines():
@@ -22,25 +24,25 @@ def canvas_player(x, y):    # x= 660, y=50
 
 # Function defining the Menu listing
 def menu_listing(x, y):     # x=30, y=50
-    pygame.draw.circle(screen, "black", (x, y), 15, 3)
-    pygame.draw.rect(screen, "black", (x+30, y-25, 200, 50), 3)
-    pygame.draw.rect(screen, "black", (x+245, y-25, 125, 50), 3)
+    pygame.draw.circle(screen, "black", (x, y), 15, 3)              # radio button
+    pygame.draw.rect(screen, "black", (x+30, y-25, 200, 50), 3)     # text box "Bubble Sort"
+    pygame.draw.rect(screen, "black", (x+245, y-25, 125, 50), 3)    # Time Elapse variable
 
-    pygame.draw.circle(screen, "black", (x, y+70), 15, 3)
-    pygame.draw.rect(screen, "black", (x+30, y+45, 200, 50), 3)
-    pygame.draw.rect(screen, "black", (x+245, y+45, 125, 50), 3)
+    pygame.draw.circle(screen, "black", (x, y+70), 15, 3)           # radio button
+    pygame.draw.rect(screen, "black", (x+30, y+45, 200, 50), 3)     # text box "Merge Sort"
+    pygame.draw.rect(screen, "black", (x+245, y+45, 125, 50), 3)    # Time Elapse variable
 
-    pygame.draw.circle(screen, "black", (x, y+140), 15, 3)
-    pygame.draw.rect(screen, "black", (x+30, y+115, 200, 50), 3)
-    pygame.draw.rect(screen, "black", (x+245, y+115, 125, 50), 3)
+    pygame.draw.circle(screen, "black", (x, y+140), 15, 3)          # radio button
+    pygame.draw.rect(screen, "black", (x+30, y+115, 200, 50), 3)    # text box "Quick Sort"
+    pygame.draw.rect(screen, "black", (x+245, y+115, 125, 50), 3)   # Time Elapse variable
 
-    pygame.draw.circle(screen, "black", (x, y+210), 15, 3)
-    pygame.draw.rect(screen, "black", (x+30, y+185, 200, 50), 3)
-    pygame.draw.rect(screen, "black", (x+245, y+185, 125, 50), 3)
+    pygame.draw.circle(screen, "black", (x, y+210), 15, 3)          # radio button
+    pygame.draw.rect(screen, "black", (x+30, y+185, 200, 50), 3)    # text box "Radix Sort"
+    pygame.draw.rect(screen, "black", (x+245, y+185, 125, 50), 3)   # Time Elapse variable
 
-    pygame.draw.circle(screen, "black", (x, y+280), 15, 3)
-    pygame.draw.rect(screen, "black", (x+30, y+255, 200, 50), 3)
-    pygame.draw.rect(screen, "black", (x+245, y+255, 125, 50), 3)
+    pygame.draw.circle(screen, "black", (x, y+280), 15, 3)          # radio button
+    pygame.draw.rect(screen, "black", (x+30, y+255, 200, 50), 3)    # text box "Linear Search"
+    pygame.draw.rect(screen, "black", (x+245, y+255, 125, 50), 3)   # Time Elapse variable
 
 # Function defining window to add Elements to algorithm
 def elements(x, y):     # x = 30, y = 430
@@ -63,39 +65,76 @@ def elements(x, y):     # x = 30, y = 430
     # Submit Button
     pygame.draw.rect(screen, "green", (x+90, y+195, 150, 50), 5)
 
-# pygame setup
+
+#=============
+# PYGAME MAIN
+#=============
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
+
+#==============
+# MENU LISTING
+#==============
+
+# Bubble Sort Listing
+bubble_text = Button(screen, 30+30, 50-25, 200, 50, text='Bubble Sort', fontSize=25, onClick=lambda: print('Bubble Sort!'))
+bubble_time = TextBox(screen, 30+245, 50-25, 125, 50)
+bubble_time.disable()
+
+
+# Merge Sort Listing
+merge_text = Button(screen, 30+30, 50+45, 200, 50, text='Merge Sort', fontSize=25, onClick=lambda: print('Merge Sort!'))
+merge_time = TextBox(screen, 30+245, 50+45, 125, 50)
+merge_time.disable()
+
+
+# Quick Sort Listing
+quick_text = Button(screen, 30+30, 50+115, 200, 50, text='Quick Sort', fontSize=25, onClick=lambda: print('Quick Sort!'))
+quick_time = TextBox(screen, 30+245, 50+115, 125, 50)
+quick_time.disable()
+
+# Radix Sort Listing
+radix_text = Button(screen, 30+30, 50+185, 200, 50, text='Radix Sort', fontSize=25, onClick=lambda: print('Radix Sort!'))
+radix_time = TextBox(screen, 30+245, 50+185, 125, 50)
+radix_time.disable()
+
+# Linear Sort Listing
+linear_text = Button(screen, 30+30, 50+255, 200, 50, text='Linear Search', fontSize=25, onClick=lambda: print('Linear Search!'))
+linear_time = TextBox(screen, 30+245, 50+255, 125, 50)
+linear_time.disable()
+
+#==========
+# ELEMENTS
+#==========
+size_text = TextBox(screen, 30+30, 430-25, 120, 50, placeholderText="Array Size", fontSize=20)
+size_submit = Button(screen, 30+165, 430-25, 100, 50, text='Enter', onClick=lambda: print('Array Entered!'))
+
+rand_button = Button(screen, 30+30, 430+40, 120, 50, text="Random", radius=20, onClick=lambda: print('Random Selected!'))
+man_button = Button(screen, 30+245, 430+40, 120, 50, text="Manual", radius=20, onClick=lambda: print('Manual Selected!'))
+
+arr_text = TextBox(screen, 30+30, 430+115, 320, 50, placeholderText="1 2 3 4 5", fontSize=25)
+submit_btn = Button(screen, 30+90, 430+195, 150, 50, text='SUBMIT', fontSize=25, radius=20, onClick=lambda: print('SUBMITTED'))
 clock = pygame.time.Clock()
 running = True
 
 while running:
-    # poll for events
-    # pygame.QUIT event means the user clicked X to close your window
-    for event in pygame.event.get():
+    events = pygame.event.get()
+    for event in events:
         if event.type == pygame.QUIT:
+            pygame.quit()
             running = False
+            quit()
 
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("gray")
 
-    # RENDER YOUR GAME HERE
-    
-    # Rulers for Reference
-    # reference_lines()
-    
-    # Canvas Player
     canvas_player(640, 180)
-    
-    # Dedicated to the Algorithm Selection
     menu_listing(30, 50)
-
-    # Displaying Elements
     elements(30, 430)
+
+    pygame_widgets.update(events)  # Call once every loop to allow widgets to render and listen
+    pygame.display.update()
 
     # flip() the display to put your work on screen
     pygame.display.flip()
-
     clock.tick(60)  # limits FPS to 60
-
-pygame.quit()
