@@ -23,24 +23,24 @@ def canvas_player(x, y):    # x= 660, y=50
 # Function defining the Menu listing
 def menu_listing(x, y):     # x=30, y=50
     pygame.draw.circle(screen, "black", (x, y), 15, 3)
-    pygame.draw.rect(screen, "black", (60, 25, 200, 50), 3)
-    pygame.draw.rect(screen, "black", (275, 25, 125, 50), 3)
+    pygame.draw.rect(screen, "black", (x+30, y-25, 200, 50), 3)
+    pygame.draw.rect(screen, "black", (x+245, y-25, 125, 50), 3)
 
-    pygame.draw.circle(screen, "black", (30, 120), 15, 3)
-    pygame.draw.rect(screen, "black", (60, 95, 200, 50), 3)
-    pygame.draw.rect(screen, "black", (275, 95, 125, 50), 3)
+    pygame.draw.circle(screen, "black", (x, y+70), 15, 3)
+    pygame.draw.rect(screen, "black", (x+30, y+45, 200, 50), 3)
+    pygame.draw.rect(screen, "black", (x+245, y+45, 125, 50), 3)
 
-    pygame.draw.circle(screen, "black", (30, 190), 15, 3)
-    pygame.draw.rect(screen, "black", (60, 165, 200, 50), 3)
-    pygame.draw.rect(screen, "black", (275, 165, 125, 50), 3)
+    pygame.draw.circle(screen, "black", (x, y+140), 15, 3)
+    pygame.draw.rect(screen, "black", (x+30, y+115, 200, 50), 3)
+    pygame.draw.rect(screen, "black", (x+245, y+115, 125, 50), 3)
 
-    pygame.draw.circle(screen, "black", (30, 260), 15, 3)
-    pygame.draw.rect(screen, "black", (60, 235, 200, 50), 3)
-    pygame.draw.rect(screen, "black", (275, 235, 125, 50), 3)
+    pygame.draw.circle(screen, "black", (x, y+210), 15, 3)
+    pygame.draw.rect(screen, "black", (x+30, y+185, 200, 50), 3)
+    pygame.draw.rect(screen, "black", (x+245, y+185, 125, 50), 3)
 
-    pygame.draw.circle(screen, "black", (30, 330), 15, 3)
-    pygame.draw.rect(screen, "black", (60, 305, 200, 50), 3)
-    pygame.draw.rect(screen, "black", (275, 305, 125, 50), 3)
+    pygame.draw.circle(screen, "black", (x, y+280), 15, 3)
+    pygame.draw.rect(screen, "black", (x+30, y+255, 200, 50), 3)
+    pygame.draw.rect(screen, "black", (x+245, y+255, 125, 50), 3)
 
 # Function defining window to add Elements to algorithm
 def elements():     # x = 30, y = 70+(720/2)
