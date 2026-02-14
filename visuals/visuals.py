@@ -43,25 +43,25 @@ def menu_listing(x, y):     # x=30, y=50
     pygame.draw.rect(screen, "black", (x+245, y+255, 125, 50), 3)
 
 # Function defining window to add Elements to algorithm
-def elements():     # x = 30, y = 70+(720/2)
+def elements(x, y):     # x = 30, y = 430
     # Option to set the size of the array
-    pygame.draw.circle(screen, "black", (30, 70+(720/2)), 15, 3)
-    pygame.draw.rect(screen, "black", (60, 405, 120, 50), 3)
-    pygame.draw.rect(screen, "blue", (60+15+120, 405, 50, 50), 3)
+    pygame.draw.circle(screen, "black", (x, y), 15, 3)
+    pygame.draw.rect(screen, "black", (x+30, y-25, 120, 50), 3)
+    pygame.draw.rect(screen, "blue", (x+165, y-25, 100, 50), 3)
 
     # Option to randomly fill the array
-    pygame.draw.circle(screen, "black", (30, 70+70+(720/2)), 15, 3)
-    pygame.draw.rect(screen, "black", (60, 70+70+(720/2)-30, 120, 50), 3)
-    pygame.draw.circle(screen, "black", (60+15+120+15+15+20, 70+70+(720/2)), 15, 3)
-    pygame.draw.rect(screen, "black", (60+15+120+15+15+15+15+20, 70+70+(720/2)-30, 120, 50), 3)
+    pygame.draw.circle(screen, "black", (x, y+70), 15, 3)
+    pygame.draw.rect(screen, "black", (x+30, y+40, 120, 50), 3)
+    pygame.draw.circle(screen, "black", (x+210, y+70), 15, 3)
+    pygame.draw.rect(screen, "black", (x+245, y+40, 120, 50), 3)
 
     # Option to fill in the array manually
-    pygame.draw.circle(screen, "black", (30, 25+25+25+70+70+(720/2)), 15, 3)
-    pygame.draw.rect(screen, "black", (60, 20+25+70+70+(720/2), 320, 50), 3)
+    pygame.draw.circle(screen, "black", (x, y+145), 15, 3)
+    pygame.draw.rect(screen, "black", (x+30, y+115, 320, 50), 3)
 
 
     # Submit Button
-    pygame.draw.rect(screen, "green", (120, 625, 150, 50), 5)
+    pygame.draw.rect(screen, "green", (x+90, y+195, 150, 50), 5)
 
 # pygame setup
 pygame.init()
@@ -91,7 +91,7 @@ while running:
     menu_listing(30, 50)
 
     # Displaying Elements
-    elements()
+    elements(30, 430)
 
     # flip() the display to put your work on screen
     pygame.display.flip()
