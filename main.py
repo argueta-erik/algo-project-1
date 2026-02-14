@@ -22,13 +22,14 @@ def time_function(fn, arr, target=None):
 # Bubble Sort
 # ============
 def bubble_sort(arr):
-    n = len(arr)
+    a = arr[:]      # creates a temporary copy of the array for visualization
+    n = len(a)
     # n-1 to fit within the size of the array due to indices
     for i in range(n-1):
         for j in range(0, n-i-1):
             if arr[j] > arr[j + 1]:
                 arr[j], arr[j+1] = arr[j+1], arr[j] # swapping the value of the index
-    return arr
+    return a
 
 # ============
 # Merge Sort
@@ -127,55 +128,69 @@ def linear_search(arr, target):
 # =======
 # Driver
 # =======
-def perform_bubble_sort(arr):
+def perform_bubble_sort(arr, debug):
     # Bubble Sort
     print("\nBubble Sort Algorithm")
-    print("Unsorted Array: ", arr)
+    if debug == True:
+        print("Unsorted Array: ", arr)
     time_bubble = time_function(bubble_sort, arr)
     sorted_bubble = bubble_sort(arr)
-    print(f"Sorted Array: {sorted_bubble}")
+    if debug == True:
+        print(f"Sorted Array: {sorted_bubble}")
     print(f"Time Elapsed: {time_bubble: .8f} seconds.")
 
 
-def perform_merge_sort(arr):
+def perform_merge_sort(arr, debug):
     # Merge Sort
     print("\n\nMerge Sort Algorithm")
-    print("Unsorted Array: ", arr)
+    if debug == True:
+        print("Unsorted Array: ", arr)
     time_merge = time_function(merge_sort, arr)
     sorted_merge = merge_sort(arr)
-    print(f"Sorted Array: {sorted_merge}")
+    if debug == True:
+        print(f"Sorted Array: {sorted_merge}")
     print(f"Time Elapsed: {time_merge: .8f} seconds.")
 
 
-def perform_quick_sort(arr):
+def perform_quick_sort(arr, debug):
     print("\n\nQuick Sort Algorithm")
-    print("Unsorted Array: ", arr)
+    if debug == True:
+        print("Unsorted Array: ", arr)
     time_quick = time_function(quick_sort, arr)
     sorted_quick = quick_sort(arr)
-    print(f"Sorted Array: {sorted_quick}")
+    if debug == True:
+        print(f"Sorted Array: {sorted_quick}")
     print(f"Time Elapsed: {time_quick: .8f} seconds.")
 
 
 
-def perform_radix_sort(arr):
+def perform_radix_sort(arr, debug):
     # Radix Sort
     print("\n\nRadix Sort Algorithm")
-    print("Unsorted Array: ", arr)
+    if debug == True:
+        print("Unsorted Array: ", arr)
     time_radix = time_function(radix_sort, arr)
     sorted_radix = radix_sort(arr)
-    print(f"Sorted Array: {sorted_radix}")
+    if debug == True:
+        print(f"Sorted Array: {sorted_radix}")
     print(f"Time Elapsed: {time_radix: .8f} seconds.")
 
 
-def perform_linear_search(arr):
+def perform_linear_search(arr, debug):
     # Linear Search
     print("\n\nLinear Search Algorithm")
-    print("Given Array: ", arr)
-    target = int(input("Please enter a number from the array: \n> "))
+    if debug == True:
+        print("Given Array: ", arr)
+        target = int(input("Please enter a number from the array: \n> "))
+    else:
+        target = random.choice(arr)
+
     start = time.perf_counter()
     index = linear_search(arr, target)
     end = time.perf_counter()
+
     time_linear = end - start
+
     if index == -1:
         print(f"{target} was not found within the array.")
     else:
@@ -186,10 +201,10 @@ def ask_size():
     # Ask the user for the size of the array [May be needed if they decide to generate random values?]  
     return int(input(f"Please enter a size for the array.\n> "))
 
-def ask_rand():
+def ask_yn(prompt):
     # Asks user if they would like to use randomly generated values for their array
     while True:
-            rand_choice = str(input("Would you like to use random values? [y/n]\n> "))
+            rand_choice = str(input(prompt))
             # If the user enters strictly either 'n' 'N' 'y' 'Y'
             match rand_choice:
                 case 'y':
@@ -226,17 +241,18 @@ def set_array(size):
 # ==================================
 def main():
     arr_size = ask_size()        # do we need to ask to set array size?
-    rand_choice = ask_rand()
+    print_choice = ask_yn("Would you like to see the array(s) printed out? [y/n] \n> ")
+    rand_choice = ask_yn("Would you like to use random values? [y/n]\n> ")
     if rand_choice == False:
         user_array = set_array(arr_size)
     else: 
         user_array = [random.choice(range(100)) for _ in range(arr_size)]
 
-    perform_bubble_sort(user_array.copy())
-    perform_merge_sort(user_array.copy())
-    perform_quick_sort(user_array.copy())
-    perform_radix_sort(user_array.copy())
-    perform_linear_search(user_array.copy())
+    perform_bubble_sort(user_array.copy(), print_choice)
+    perform_merge_sort(user_array.copy(), print_choice)
+    perform_quick_sort(user_array.copy(), print_choice)
+    perform_radix_sort(user_array.copy(), print_choice)
+    perform_linear_search(user_array.copy(), print_choice)
     
 
 # main
