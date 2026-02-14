@@ -6,8 +6,8 @@ Python v3.12
 # Reference
 ## Branches
 - Dev: Development Branch
-- driver: driver function to run the algorithms and print
 - visuals: dedicated to creating visuals via Pygame
+- interactions: functions that allow user interactivity (set_array, set_size, and such); important to bridging visuals
 
 ## To-Do:
 [] Add any appropriate comments to the main.py
