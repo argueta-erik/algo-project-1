@@ -1,6 +1,7 @@
 import time     # import time module to measure duration functions
 import random   # import random module to genarate random input data for the algorithms
 
+
 # ===============
 # Time Function
 # ===============
