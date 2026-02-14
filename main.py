@@ -1,6 +1,6 @@
 import time     # import time module to measure duration functions
 import random   # import random module to genarate random input data for the algorithms
-
+import numpy as np
 
 # ===============
 # Time Function
@@ -181,7 +181,7 @@ def perform_linear_search(arr):
 
 def ask_size():
     # Ask the user for the size of the array [May be needed if they decide to generate random values?]  
-    int(input(f"Please enter a size for the array.\n> "))
+    return int(input(f"Please enter a size for the array.\n> "))
 
 def ask_rand():
     # Asks user if they would like to use randomly generated values for their array
@@ -201,29 +201,42 @@ def ask_rand():
                     # User did not enter valid options, continue to ask
                     print("\nPlease enter a valid option [y/n]")
 
-def set_array():
-    # Asks user to enter values for the array
-    print("Please type number to be entered into the arrray, separated by spaces.")
-    print("For example:\n> 1 2 3 4 5 6")
-    print("Array: [1, 2, 3, 4, 5, 6]")
-    array_input = input("> ")
+def set_array(size):
+    while True:
+        # Asks user to enter values for the array
+        print("Please type number to be entered into the arrray, separated by spaces.")
+        print("For example:\n> 1 2 3 4 5 6")
+        print("Array: [1, 2, 3, 4, 5, 6]")
+        array_input = input("> ")
 
-    # returns a list (or array) after splitting the input by integers and spaces with map function
-    # error-prone, however, if user does not follow directions
-    return list(map(int, array_input.split()))
+        # returns a list (or array) after splitting the input by integers and spaces with map function
+        # error-prone, however, if user does not follow directions
+        temp_arr = list(map(int, array_input.split()))
+
+        if len(temp_arr) == size:
+            return temp_arr
+        else:
+            print(f"\n\nThe array you entered does not match the size: {size}.\nPlease try again.\n\n")
+
 
 # ==================================
 # MAIN FUNCTION TO RUN ALL COMMANDS
 # ==================================
 def main():
-    # arr_size = ask_size()         # do we need to ask to set array size?
+    arr_size = ask_size()        # do we need to ask to set array size?
     rand_choice = ask_rand()
     if rand_choice == False:
-        user_array = set_array()
-        print(f"Array: {user_array}")
+        user_array = set_array(arr_size)
     else: 
-        print("-1")
+        user_array = [random.choice(range(100)) for _ in range(arr_size)]
+        
+    print(f"Array: {user_array}")
 
+    perform_bubble_sort(user_array.copy())
+    perform_merge_sort(user_array.copy())
+    perform_quick_sort(user_array.copy())
+    perform_radix_sort(user_array.copy())
+    perform_linear_search(user_array.copy())
 
 # main
 if __name__ == "__main__":
