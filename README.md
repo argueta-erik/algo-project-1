@@ -6,7 +6,14 @@ Python v3.12
 # Reference
 ## Branches
 - Dev: Development Branch
-    - time_func: branch for working on time function
+- visuals: dedicated to creating visuals via Pygame
+- interactions: functions that allow user interactivity (set_array, set_size, and such); important to bridging visuals
+
+## To-Do:
+[] Add any appropriate comments to the main.py
+[] Create visualization for project
+[] Create Video Presentation
+[] Create PowerPoint Presentation
 
 # Objective
 This project aims to deepen students’ understanding of sorting algorithms by implementing, analyzing, and visualizing the performance of various sorting techniques in Python. Students will gain practical experience in algorithm implementation, performance analysis, and the use of visual aids to demonstrate complex concepts.​
