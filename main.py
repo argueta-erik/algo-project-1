@@ -129,7 +129,7 @@ def linear_search(arr, target):
 # =======
 def perform_bubble_sort(arr):
     # Bubble Sort
-    print("Bubble Sort Algorithm")
+    print("\nBubble Sort Algorithm")
     print("Unsorted Array: ", arr)
     time_bubble = time_function(bubble_sort, arr)
     sorted_bubble = bubble_sort(arr)
@@ -176,8 +176,11 @@ def perform_linear_search(arr):
     index = linear_search(arr, target)
     end = time.perf_counter()
     time_linear = end - start
-    print(f"{target} was located at index: {index}.")
-    print(f"Time Elapsed: {time_linear: .8f} seconds.")
+    if index == -1:
+        print(f"{target} was not found within the array.")
+    else:
+        print(f"{target} was located at index: {index}.")
+    print(f"Time Elapsed: {time_linear: .8f} seconds.\n")
 
 def ask_size():
     # Ask the user for the size of the array [May be needed if they decide to generate random values?]  
@@ -218,7 +221,6 @@ def set_array(size):
         else:
             print(f"\n\nThe array you entered does not match the size: {size}.\nPlease try again.\n\n")
 
-
 # ==================================
 # MAIN FUNCTION TO RUN ALL COMMANDS
 # ==================================
@@ -229,24 +231,17 @@ def main():
         user_array = set_array(arr_size)
     else: 
         user_array = [random.choice(range(100)) for _ in range(arr_size)]
-        
-    print(f"Array: {user_array}")
 
     perform_bubble_sort(user_array.copy())
     perform_merge_sort(user_array.copy())
     perform_quick_sort(user_array.copy())
     perform_radix_sort(user_array.copy())
     perform_linear_search(user_array.copy())
+    
 
 # main
 if __name__ == "__main__":
-    # test_arr = [64, 34, 25, 12, 22, 11, 90, 5, 22, 11]
 
-    main() 
-    # perform_bubble_sort(test_arr.copy())
-    # perform_merge_sort(test_arr.copy())
-    # perform_quick_sort(test_arr.copy())
-    # perform_radix_sort(test_arr.copy())
-    # perform_linear_search(test_arr.copy())
+    main()
     
     
