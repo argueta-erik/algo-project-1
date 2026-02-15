@@ -27,8 +27,8 @@ def bubble_sort(arr):
     # n-1 to fit within the size of the array due to indices
     for i in range(n-1):
         for j in range(0, n-i-1):
-            if arr[j] > arr[j + 1]:
-                arr[j], arr[j+1] = arr[j+1], arr[j] # swapping the value of the index
+            if a[j] > a[j + 1]:
+                a[j], a[j+1] = a[j+1], a[j] # swapping the value of the index
     return a
 
 # ============
@@ -129,51 +129,56 @@ def linear_search(arr, target):
 # Driver
 # =======
 def perform_bubble_sort(arr, debug):
-    # Bubble Sort
     print("\nBubble Sort Algorithm")
-    if debug == True:
-        print("Unsorted Array: ", arr)
     time_bubble = time_function(bubble_sort, arr)
     sorted_bubble = bubble_sort(arr)
-    if debug == True:
-        print(f"Sorted Array: {sorted_bubble}")
-    print(f"Time Elapsed: {time_bubble: .8f} seconds.")
-
-
-def perform_merge_sort(arr, debug):
-    # Merge Sort
-    print("\n\nMerge Sort Algorithm")
+    
     if debug == True:
         print("Unsorted Array: ", arr)
+        print(f"Sorted Array: {sorted_bubble}")
+
+    print(f"Time Elapsed: {time_bubble: .8f} seconds.")
+    
+    return time_bubble, sorted_bubble
+
+def perform_merge_sort(arr, debug):
+    print("\n\nMerge Sort Algorithm")
     time_merge = time_function(merge_sort, arr)
     sorted_merge = merge_sort(arr)
+
     if debug == True:
+        print("Unsorted Array: ", arr)
         print(f"Sorted Array: {sorted_merge}")
+    
     print(f"Time Elapsed: {time_merge: .8f} seconds.")
 
+    return time_merge, sorted_merge
 
 def perform_quick_sort(arr, debug):
     print("\n\nQuick Sort Algorithm")
-    if debug == True:
-        print("Unsorted Array: ", arr)
     time_quick = time_function(quick_sort, arr)
     sorted_quick = quick_sort(arr)
+    
     if debug == True:
+        print("Unsorted Array: ", arr)    
         print(f"Sorted Array: {sorted_quick}")
+    
     print(f"Time Elapsed: {time_quick: .8f} seconds.")
 
+    return time_quick, sorted_quick
 
 def perform_radix_sort(arr, debug):
-    # Radix Sort
     print("\n\nRadix Sort Algorithm")
-    if debug == True:
-        print("Unsorted Array: ", arr)
     time_radix = time_function(radix_sort, arr)
     sorted_radix = radix_sort(arr)
+
     if debug == True:
+        print("Unsorted Array: ", arr)
         print(f"Sorted Array: {sorted_radix}")
+
     print(f"Time Elapsed: {time_radix: .8f} seconds.")
 
+    return time_radix, sorted_radix
 
 def perform_linear_search(arr, debug):
     # Linear Search
