@@ -1,4 +1,5 @@
 # Example file showing a basic pygame "game loop"
+import main
 import pygame
 import pygame_widgets
 from pygame_widgets.button import Button 
@@ -78,6 +79,11 @@ def elements(x, y):     # x = 30, y = 430
     # Submit Button
     pygame.draw.rect(screen, "green", (x+90, y+195, 150, 50), 5)
 
+def get_size():
+    print(size_text.getText())
+
+def get_array():
+    print(arr_text.getText())
 #=============
 # PYGAME MAIN
 #=============
@@ -169,7 +175,11 @@ linear_time.disable()
 # ELEMENTS
 #==========
 size_text = TextBox(screen, 30+30, 430-25, 125, 50, placeholderText="Array Size", fontSize=25)
-size_submit = Button(screen, 30+170, 430-25, 100, 50, text='Enter', onClick=lambda: print('Array Entered!'))
+size_submit = Button(
+    screen, 
+    30+170, 430-25, 100, 50, 
+    text='Enter', 
+    onClick=lambda: get_size())
 
 rand_button = Button(
     screen, 
@@ -188,7 +198,13 @@ man_button = Button(
     )
 
 arr_text = TextBox(screen, 30+30, 430+115, 320, 50, placeholderText="1 2 3 4 5", fontSize=25)
-submit_btn = Button(screen, 30+90, 430+195, 150, 50, text='SUBMIT', fontSize=25, radius=20, onClick=lambda: print('SUBMITTED'))
+submit_btn = Button(
+    screen, 
+    30+90, 430+195, 150, 50, 
+    text='SUBMIT', 
+    fontSize=25, 
+    radius=20, 
+    onClick=lambda: get_array())
 clock = pygame.time.Clock()
 running = True
 
