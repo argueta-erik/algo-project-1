@@ -63,8 +63,7 @@ def elements(x, y):     # x = 30, y = 430
     if selected_method == "random":
         pygame.draw.circle(screen, "green", (x, y), 15)
         pygame.draw.rect(screen, "black", (30+170, 430-25, 125, 50), 5)
-        arr_text.disable()
-        size_text.enable()
+        
     # pygame.draw.rect(screen, "black", (x+30, y-25, 120, 50), 3)
     # pygame.draw.rect(screen, "blue", (x+170, y-25, 100, 50), 3)
 
@@ -72,8 +71,7 @@ def elements(x, y):     # x = 30, y = 430
     pygame.draw.circle(screen, "black", (x, y+70), 15, 3)
     if selected_method == "manual":
         pygame.draw.circle(screen, "green", (x, y+70), 15)
-        size_text.disable()
-        arr_text.enable()
+        
     # pygame.draw.rect(screen, "black", (x+30, y+40, 120, 50), 3)
     # pygame.draw.circle(screen, "black", (x+210, y+70), 15, 3)
     # pygame.draw.rect(screen, "black", (x+245, y+40, 120, 50), 3)
@@ -119,6 +117,7 @@ def run_algos():
     time_lin = main.perform_linear_search(main_arr)
     linear_time_result.setText(f"{time_lin:.8f} second(s)")
 
+
 #=============
 # PYGAME MAIN
 #=============
@@ -137,6 +136,14 @@ def select_algo(name):
 def select_method(name):
     global selected_method
     selected_method = name
+
+    if name == "random":
+        arr_text.disable()
+        size_text.enable()
+    
+    elif name == "manual":
+        size_text.disable()
+        arr_text.enable()
 
 #===============
 # CANVAS PLAYER
@@ -238,6 +245,9 @@ submit_btn = Button(
     fontSize=25, 
     radius=20, 
     onClick=lambda: run_algos())
+
+size_text.enable()
+arr_text.disable()
 
 
 clock = pygame.time.Clock()
