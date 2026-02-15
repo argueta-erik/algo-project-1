@@ -1,5 +1,6 @@
 # Example file showing a basic pygame "game loop"
 import main
+import random
 import pygame
 import pygame_widgets
 from pygame_widgets.button import Button 
@@ -10,7 +11,7 @@ def reference_lines():
     # Vertical Lines
     pygame.draw.line(screen, "red", (640, 0), (640, 720), 1)    # 1/4 Line
     pygame.draw.line(screen, "red", (320, 0), (320, 720), 1)    # 1/2 Line
-    pygame.draw.line(screen, "red", (960, 0), (960, 720), 1) # 3/4 Line
+    pygame.draw.line(screen, "red", (960, 0), (960, 720), 1)    # 3/4 Line
 
     # Horizontal Lines
     pygame.draw.line(screen, "blue", (0, 360), (1280, 360), 1)
@@ -20,7 +21,7 @@ def reference_lines():
 def canvas_player(x, y):    # x= 660, y=50
     pygame.draw.rect(screen, "black", (x, y, 600, 320), 3)   # Canvas Player
     pygame.draw.rect(screen, "black", (x+275, y+340, 50, 50), 3)    # Play Button
-    pygame.draw.rect(screen, "black", (x+340, y+340, 75, 50), 3)   # FFWD Button
+    pygame.draw.rect(screen, "black", (x+340, y+340, 75, 50), 3)    # FFWD Button
     pygame.draw.rect(screen, "black", (x+185, y+340, 75, 50), 3)    # RWND Button
 
 # Function defining the Menu listing
@@ -80,10 +81,38 @@ def elements(x, y):     # x = 30, y = 430
     pygame.draw.rect(screen, "green", (x+90, y+195, 150, 50), 5)
 
 def get_size():
-    print(size_text.getText())
+    global arr_size
+    arr_size = int(size_text.getText())
+    return arr_size
 
 def get_array():
-    print(arr_text.getText())
+    global rand_select
+    oof = arr_text.getText()
+    return list(map(int, oof.split()))
+    
+def run_algos():
+    if selected_method == "manual":
+        main_arr = get_array()
+
+    elif selected_method == "random":
+        rand_arr_size = get_size()
+        main_arr = [random.choice(range(100)) for _ in range(rand_arr_size)]
+
+    time_bub, sorted_bub = main.perform_bubble_sort(main_arr)
+    bubble_time_result.setText(f"{time_bub:.8f} second(s)")
+
+    time_merg, sorted_merg = main.perform_merge_sort(main_arr)
+    merge_time_result.setText(f"{time_merg:.8f} second(s)")
+
+    time_quic, sorted_quic = main.perform_quick_sort(main_arr)
+    quick_time_result.setText(f"{time_quic:.8f} second(s)")
+
+    time_rad, sorted_rad = main.perform_radix_sort(main_arr)
+    radix_time_result.setText(f"{time_rad:.8f} second(s)")
+
+    time_lin = main.perform_linear_search(main_arr)
+    linear_time_result.setText(f"{time_lin:.8f} second(s)")
+
 #=============
 # PYGAME MAIN
 #=============
@@ -92,6 +121,8 @@ screen = pygame.display.set_mode((1280, 720))
 
 selected_algo = None
 selected_method = None
+arr_size = None
+rand_select = False
 
 def select_algo(name):
     global selected_algo
@@ -111,7 +142,6 @@ fforward = Button(screen, 640+340, 180+340, 75, 50, text="FFWD", onClick=lambda:
 #==============
 # MENU LISTING
 #==============
-
 # Bubble Sort Listing
 bubble_text = Button(
     screen, 
@@ -120,8 +150,8 @@ bubble_text = Button(
     fontSize=25, 
     onClick=lambda: select_algo("bubble")
     )
-bubble_time = TextBox(screen, 30+245, 50-25, 125, 50)
-bubble_time.disable()
+bubble_time_result = TextBox(screen, 30+245, 50-25, 225, 50)
+bubble_time_result.disable()
 
 
 # Merge Sort Listing
@@ -132,8 +162,8 @@ merge_text = Button(
     fontSize=25, 
     onClick=lambda: select_algo("merge")
     )
-merge_time = TextBox(screen, 30+245, 50+45, 125, 50)
-merge_time.disable()
+merge_time_result = TextBox(screen, 30+245, 50+45, 225, 50)
+merge_time_result.disable()
 
 
 # Quick Sort Listing
@@ -144,8 +174,8 @@ quick_text = Button(
     fontSize=25, 
     onClick=lambda: select_algo("quick")
     )
-quick_time = TextBox(screen, 30+245, 50+115, 125, 50)
-quick_time.disable()
+quick_time_result = TextBox(screen, 30+245, 50+115, 225, 50)
+quick_time_result.disable()
 
 
 # Radix Sort Listing
@@ -156,11 +186,11 @@ radix_text = Button(
     fontSize=25, 
     onClick=lambda: select_algo("radix")
     )
-radix_time = TextBox(screen, 30+245, 50+185, 125, 50)
-radix_time.disable()
+radix_time_result = TextBox(screen, 30+245, 50+185, 225, 50)
+radix_time_result.disable()
 
 
-# Linear Sort Listing
+# Linear Search Listing
 linear_text = Button(
     screen, 
     30+30, 50+255, 200, 50, 
@@ -168,8 +198,8 @@ linear_text = Button(
     fontSize=25, 
     onClick=lambda: select_algo("linear")
     )
-linear_time = TextBox(screen, 30+245, 50+255, 125, 50)
-linear_time.disable()
+linear_time_result = TextBox(screen, 30+245, 50+255, 225, 50)
+linear_time_result.disable()
 
 #==========
 # ELEMENTS
@@ -178,7 +208,7 @@ size_text = TextBox(screen, 30+30, 430-25, 125, 50, placeholderText="Array Size"
 size_submit = Button(
     screen, 
     30+170, 430-25, 100, 50, 
-    text='Enter', 
+    text='Set', 
     onClick=lambda: get_size())
 
 rand_button = Button(
@@ -204,10 +234,11 @@ submit_btn = Button(
     text='SUBMIT', 
     fontSize=25, 
     radius=20, 
-    onClick=lambda: get_array())
+    onClick=lambda: run_algos())
+
+
 clock = pygame.time.Clock()
 running = True
-
 while running:
     events = pygame.event.get()
     for event in events:
@@ -224,8 +255,6 @@ while running:
     elements(30, 430)
 
     pygame_widgets.update(events)  # Call once every loop to allow widgets to render and listen
-    # pygame.display.update()
 
-    # flip() the display to put your work on screen
     pygame.display.flip()
     clock.tick(60)  # limits FPS to 60

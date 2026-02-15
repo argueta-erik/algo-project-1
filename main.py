@@ -128,7 +128,7 @@ def linear_search(arr, target):
 # =======
 # Driver
 # =======
-def perform_bubble_sort(arr, debug):
+def perform_bubble_sort(arr, debug=False):
     print("\nBubble Sort Algorithm")
     time_bubble = time_function(bubble_sort, arr)
     sorted_bubble = bubble_sort(arr)
@@ -141,7 +141,7 @@ def perform_bubble_sort(arr, debug):
     
     return time_bubble, sorted_bubble
 
-def perform_merge_sort(arr, debug):
+def perform_merge_sort(arr, debug=False):
     print("\n\nMerge Sort Algorithm")
     time_merge = time_function(merge_sort, arr)
     sorted_merge = merge_sort(arr)
@@ -154,7 +154,7 @@ def perform_merge_sort(arr, debug):
 
     return time_merge, sorted_merge
 
-def perform_quick_sort(arr, debug):
+def perform_quick_sort(arr, debug=False):
     print("\n\nQuick Sort Algorithm")
     time_quick = time_function(quick_sort, arr)
     sorted_quick = quick_sort(arr)
@@ -167,7 +167,7 @@ def perform_quick_sort(arr, debug):
 
     return time_quick, sorted_quick
 
-def perform_radix_sort(arr, debug):
+def perform_radix_sort(arr, debug=False):
     print("\n\nRadix Sort Algorithm")
     time_radix = time_function(radix_sort, arr)
     sorted_radix = radix_sort(arr)
@@ -180,7 +180,7 @@ def perform_radix_sort(arr, debug):
 
     return time_radix, sorted_radix
 
-def perform_linear_search(arr, debug):
+def perform_linear_search(arr, debug=False):
     # Linear Search
     print("\n\nLinear Search Algorithm")
     if debug == True:
@@ -200,6 +200,8 @@ def perform_linear_search(arr, debug):
     else:
         print(f"{target} was located at index: {index}.")
     print(f"Time Elapsed: {time_linear: .8f} seconds.\n")
+
+    return time_linear
 
 def ask_size():
     # Ask the user for the size of the array [May be needed if they decide to generate random values?]  
