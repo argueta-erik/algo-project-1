@@ -60,18 +60,24 @@ def menu_listing(x, y):     # x=30, y=50
 def elements(x, y):     # x = 30, y = 430
     # Option to set the size of the array
     pygame.draw.circle(screen, "black", (x, y), 15, 3)
+    if selected_method == "random":
+        pygame.draw.circle(screen, "green", (x, y), 15)
+        pygame.draw.rect(screen, "black", (30+170, 430-25, 125, 50), 5)
+        arr_text.disable()
+        size_text.enable()
     # pygame.draw.rect(screen, "black", (x+30, y-25, 120, 50), 3)
     # pygame.draw.rect(screen, "blue", (x+170, y-25, 100, 50), 3)
 
     # Option to randomly fill the array
     pygame.draw.circle(screen, "black", (x, y+70), 15, 3)
-    # pygame.draw.rect(screen, "black", (x+30, y+40, 120, 50), 3)
-    pygame.draw.circle(screen, "black", (x+210, y+70), 15, 3)
-    # pygame.draw.rect(screen, "black", (x+245, y+40, 120, 50), 3)
-    if selected_method == "random":
+    if selected_method == "manual":
         pygame.draw.circle(screen, "green", (x, y+70), 15)
-    elif selected_method == "manual":
-        pygame.draw.circle(screen, "green", (x+210, y+70), 15)
+        size_text.disable()
+        arr_text.enable()
+    # pygame.draw.rect(screen, "black", (x+30, y+40, 120, 50), 3)
+    # pygame.draw.circle(screen, "black", (x+210, y+70), 15, 3)
+    # pygame.draw.rect(screen, "black", (x+245, y+40, 120, 50), 3)
+    
 
     # Option to fill in the array manually
     pygame.draw.circle(screen, "black", (x, y+145), 15, 3)
@@ -204,16 +210,13 @@ linear_time_result.disable()
 #==========
 # ELEMENTS
 #==========
-size_text = TextBox(screen, 30+30, 430-25, 125, 50, placeholderText="Array Size", fontSize=25)
-size_submit = Button(
-    screen, 
-    30+170, 430-25, 100, 50, 
-    text='Set', 
-    onClick=lambda: get_size())
+# size_text -> 430-25
+size_text = TextBox(screen, 30+170, 430-25, 125, 50, placeholderText="Array Size", fontSize=25)
+
 
 rand_button = Button(
     screen, 
-    30+30, 430+40, 120, 50, 
+    30+30, 430-25, 120, 50, # y = 430+40 
     text="Random", 
     radius=20, 
     onClick=lambda: select_method("random")
@@ -221,13 +224,13 @@ rand_button = Button(
 
 man_button = Button(
     screen, 
-    30+245, 430+40, 120, 50, 
+    30+30, 430+40, 120, 50, # x=30+245 y = 430+40
     text="Manual", 
     radius=20, 
     onClick=lambda: select_method("manual")
     )
 
-arr_text = TextBox(screen, 30+30, 430+115, 320, 50, placeholderText="1 2 3 4 5", fontSize=25)
+arr_text = TextBox(screen, 30+170, 430+40, 320, 50, placeholderText="1 2 3 4 5", fontSize=25)
 submit_btn = Button(
     screen, 
     30+90, 430+195, 150, 50, 
