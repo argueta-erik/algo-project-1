@@ -484,7 +484,7 @@ bubble_text = Button(
     fontSize=25, 
     onClick=lambda: select_algo("bubble")
     )
-bubble_time_result = TextBox(screen, 30+245, 50-25, 225, 50, fontSize=14)
+bubble_time_result = TextBox(screen, 30+245, 50-25, 225, 50, fontSize=20)
 
 
 # Merge Sort Listing
@@ -495,7 +495,7 @@ merge_text = Button(
     fontSize=25, 
     onClick=lambda: select_algo("merge")
     )
-merge_time_result = TextBox(screen, 30+245, 50+45, 225, 50, fontSize=14)
+merge_time_result = TextBox(screen, 30+245, 50+45, 225, 50, fontSize=20)
 
 
 # Quick Sort Listing
@@ -506,7 +506,7 @@ quick_text = Button(
     fontSize=25, 
     onClick=lambda: select_algo("quick")
     )
-quick_time_result = TextBox(screen, 30+245, 50+115, 225, 50, fontSize=14)
+quick_time_result = TextBox(screen, 30+245, 50+115, 225, 50, fontSize=20)
 
 
 # Radix Sort Listing
@@ -517,7 +517,7 @@ radix_text = Button(
     fontSize=25, 
     onClick=lambda: select_algo("radix")
     )
-radix_time_result = TextBox(screen, 30+245, 50+185, 225, 50, fontSize=14)
+radix_time_result = TextBox(screen, 30+245, 50+185, 225, 50, fontSize=20)
 
 
 # Linear Search Listing
@@ -528,7 +528,7 @@ linear_text = Button(
     fontSize=25, 
     onClick=lambda: select_algo("linear")
     )
-linear_time_result = TextBox(screen, 30+245, 50+255, 225, 50, fontSize=14)
+linear_time_result = TextBox(screen, 30+245, 50+255, 225, 50, fontSize=20)
 
 #==========
 # ELEMENTS
