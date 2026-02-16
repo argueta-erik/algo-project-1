@@ -1,0 +1,310 @@
+# Example file showing a basic pygame "game loop"
+import main
+import random
+import pygame
+import pygame_widgets
+from pygame_widgets.button import Button 
+from pygame_widgets.textbox import TextBox
+
+# Function defining the lines and rulers for reference
+def reference_lines():
+    # Vertical Lines
+    pygame.draw.line(screen, "red", (640, 0), (640, 720), 1)    # 1/4 Line
+    pygame.draw.line(screen, "red", (320, 0), (320, 720), 1)    # 1/2 Line
+    pygame.draw.line(screen, "red", (960, 0), (960, 720), 1)    # 3/4 Line
+
+    # Horizontal Lines
+    pygame.draw.line(screen, "blue", (0, 360), (1280, 360), 1)
+    pygame.draw.line(screen, "blue", (0, 70+70+(720/2)), (1280, 70+70+(720/2)), 1)
+    
+# Function defining the Visualization for the algorithms
+def canvas_player(x, y):    # x= 660, y=50
+    pygame.draw.rect(screen, "black", (x, y, 600, 320), 3)   # Canvas Player
+    pygame.draw.rect(screen, "black", (x+275, y+340, 50, 50), 3)    # Play Button
+    pygame.draw.rect(screen, "black", (x+340, y+340, 75, 50), 3)    # FFWD Button
+    pygame.draw.rect(screen, "black", (x+185, y+340, 75, 50), 3)    # RWND Button
+
+# Function defining the Menu listing
+def menu_listing(x, y):     # x=30, y=50
+    pygame.draw.circle(screen, "black", (x, y), 15, 3)              # bubble toggle option
+    pygame.draw.rect(screen, "black", (x+30, y-25, 200, 50), 3)     # text box "Bubble Sort"
+    pygame.draw.rect(screen, "black", (x+245, y-25, 125, 50), 3)    # Time Elapse variable
+    if selected_algo == "bubble":
+        pygame.draw.circle(screen, "green", (x, y), 15)
+
+    pygame.draw.circle(screen, "black", (x, y+70), 15, 3)           # merge toggle option
+    pygame.draw.rect(screen, "black", (x+30, y+45, 200, 50), 3)     # text box "Merge Sort"
+    pygame.draw.rect(screen, "black", (x+245, y+45, 125, 50), 3)    # Time Elapse variable
+    if selected_algo == "merge":
+        pygame.draw.circle(screen, "green", (x, y+70), 15)
+
+    pygame.draw.circle(screen, "black", (x, y+140), 15, 3)          # quick toggle option
+    pygame.draw.rect(screen, "black", (x+30, y+115, 200, 50), 3)    # text box "Quick Sort"
+    pygame.draw.rect(screen, "black", (x+245, y+115, 125, 50), 3)   # Time Elapse variable
+    if selected_algo == "quick":
+        pygame.draw.circle(screen, "green", (x, y+140), 15)
+
+    pygame.draw.circle(screen, "black", (x, y+210), 15, 3)          # radix toggle option
+    pygame.draw.rect(screen, "black", (x+30, y+185, 200, 50), 3)    # text box "Radix Sort"
+    pygame.draw.rect(screen, "black", (x+245, y+185, 125, 50), 3)   # Time Elapse variable
+    if selected_algo == "radix":
+        pygame.draw.circle(screen, "green", (x, y+210), 15)
+
+    pygame.draw.circle(screen, "black", (x, y+280), 15, 3)          # linear toggle option
+    pygame.draw.rect(screen, "black", (x+30, y+255, 200, 50), 3)    # text box "Linear Search"
+    pygame.draw.rect(screen, "black", (x+245, y+255, 125, 50), 3)   # Time Elapse variable
+    if selected_algo == "linear":
+        pygame.draw.circle(screen, "green", (x, y+280), 15)
+
+# Function defining window to add Elements to algorithm
+def elements(x, y):     # x = 30, y = 430
+    # Option to set the size of the array
+    pygame.draw.circle(screen, "black", (x, y), 15, 3)
+    if selected_method == "random":
+        pygame.draw.circle(screen, "green", (x, y), 15)
+        pygame.draw.rect(screen, "black", (30+170, 430-25, 125, 50), 5)
+        
+    # pygame.draw.rect(screen, "black", (x+30, y-25, 120, 50), 3)
+    # pygame.draw.rect(screen, "blue", (x+170, y-25, 100, 50), 3)
+
+    # Option to randomly fill the array
+    pygame.draw.circle(screen, "black", (x, y+70), 15, 3)
+    if selected_method == "manual":
+        pygame.draw.circle(screen, "green", (x, y+70), 15)
+        
+    # pygame.draw.rect(screen, "black", (x+30, y+40, 120, 50), 3)
+    # pygame.draw.circle(screen, "black", (x+210, y+70), 15, 3)
+    # pygame.draw.rect(screen, "black", (x+245, y+40, 120, 50), 3)
+    
+
+    #  Displays the sorted array and status
+    if status == "idle":
+        pygame.draw.circle(screen, "black", (x, y+145), 15, 3)
+    elif status == "sorting":
+        pygame.draw.circle(screen, "yellow", (x, y+145), 15)
+    elif status == "complete":
+        pygame.draw.circle(screen, "green", (x, y+145), 15)
+    pygame.draw.rect(screen, "black", (30+30, 430+115, 320, 50), 3)
+
+    # Submit Button
+    pygame.draw.rect(screen, "green", (x+90, y+195, 150, 50), 5)
+
+
+def get_size():
+    global arr_size
+    arr_size = int(size_text.getText())
+    return arr_size
+
+
+def get_array():
+    global rand_select
+    oof = arr_text.getText()
+    return list(map(int, oof.split()))
+    
+
+def run_algos():
+    global status
+    status = "sorting"
+    if selected_method == "manual":
+        main_arr = get_array()
+
+    elif selected_method == "random":
+        rand_arr_size = get_size()
+        main_arr = [random.choice(range(100)) for _ in range(rand_arr_size)]
+
+    time_bub, sorted_bub = main.perform_bubble_sort(main_arr)
+    bubble_time_result.setText(f"{time_bub:.8f} second(s)")
+
+    time_merg, sorted_merg = main.perform_merge_sort(main_arr)
+    merge_time_result.setText(f"{time_merg:.8f} second(s)")
+
+    time_quic, sorted_quic = main.perform_quick_sort(main_arr)
+    quick_time_result.setText(f"{time_quic:.8f} second(s)")
+
+    time_rad, sorted_rad = main.perform_radix_sort(main_arr)
+    radix_time_result.setText(f"{time_rad:.8f} second(s)")
+
+    time_lin = main.perform_linear_search(main_arr)
+    linear_time_result.setText(f"{time_lin:.8f} second(s)")
+
+    oof = sorted_bub
+    status = "complete"
+    final_arr.setText(oof)
+
+
+def enable_size():
+    size_text.enable()
+    size_text.show()
+
+
+def disable_size():
+    size_text.disable()
+    size_text.hide()
+    size_text.setText("")
+
+
+def enable_array():
+    arr_text.enable()
+    arr_text.show()
+    
+
+def disable_array():
+    arr_text.disable()
+    arr_text.hide()
+    arr_text.setText("")
+
+#=============
+# PYGAME MAIN
+#=============
+pygame.init()
+screen = pygame.display.set_mode((1280, 720))
+
+selected_algo = None
+selected_method = "random"
+arr_size = None
+rand_select = False
+status = "idle"
+
+def select_algo(name):
+    global selected_algo
+    selected_algo = name
+
+def select_method(name):
+    global selected_method
+    selected_method = name
+
+    if name == "random":
+        disable_array()
+        enable_size()
+
+    elif name == "manual":
+        disable_size()
+        enable_array()
+
+#===============
+# CANVAS PLAYER
+#===============
+rewind = Button(screen, 640+185, 180+340, 75, 50, text="RWD", onClick=lambda: print("REWIND!"))
+play_btn = Button(screen, 640+275, 180+340, 50, 50, text="Play", onClick=lambda: print("Play Button!"))
+fforward = Button(screen, 640+340, 180+340, 75, 50, text="FFWD", onClick=lambda: print("FFORWARD!"))
+
+#==============
+# MENU LISTING
+#==============
+# Bubble Sort Listing
+bubble_text = Button(
+    screen, 
+    30+30, 50-25, 200, 50, 
+    text='Bubble Sort', 
+    fontSize=25, 
+    onClick=lambda: select_algo("bubble")
+    )
+bubble_time_result = TextBox(screen, 30+245, 50-25, 225, 50)
+bubble_time_result.disable()
+
+
+# Merge Sort Listing
+merge_text = Button(
+    screen, 
+    30+30, 50+45, 200, 50, 
+    text='Merge Sort', 
+    fontSize=25, 
+    onClick=lambda: select_algo("merge")
+    )
+merge_time_result = TextBox(screen, 30+245, 50+45, 225, 50)
+merge_time_result.disable()
+
+
+# Quick Sort Listing
+quick_text = Button(
+    screen, 
+    30+30, 50+115, 200, 50, 
+    text='Quick Sort', 
+    fontSize=25, 
+    onClick=lambda: select_algo("quick")
+    )
+quick_time_result = TextBox(screen, 30+245, 50+115, 225, 50)
+quick_time_result.disable()
+
+
+# Radix Sort Listing
+radix_text = Button(
+    screen, 
+    30+30, 50+185, 200, 50, 
+    text='Radix Sort', 
+    fontSize=25, 
+    onClick=lambda: select_algo("radix")
+    )
+radix_time_result = TextBox(screen, 30+245, 50+185, 225, 50)
+radix_time_result.disable()
+
+
+# Linear Search Listing
+linear_text = Button(
+    screen, 
+    30+30, 50+255, 200, 50, 
+    text='Linear Search', 
+    fontSize=25, 
+    onClick=lambda: select_algo("linear")
+    )
+linear_time_result = TextBox(screen, 30+245, 50+255, 225, 50)
+linear_time_result.disable()
+
+#==========
+# ELEMENTS
+#==========
+size_text = TextBox(screen, 30+170, 430-25, 125, 50, placeholderText="Array Size", fontSize=25)
+
+rand_button = Button(
+    screen, 
+    30+30, 430-25, 120, 50, # y = 430+40 
+    text="Random", 
+    radius=20, 
+    onClick=lambda: select_method("random")
+    )
+
+man_button = Button(
+    screen, 
+    30+30, 430+40, 120, 50, # x=30+245 y = 430+40
+    text="Manual", 
+    radius=20, 
+    onClick=lambda: select_method("manual")
+    )
+
+arr_text = TextBox(screen, 30+170, 430+40, 320, 50, placeholderText="1 2 3 4 5", fontSize=25)
+
+final_arr = TextBox(screen, 60, 545, 500, 150, fontSize=20)
+
+submit_btn = Button(
+    screen, 
+    575, 590, 150, 50, 
+    text='SUBMIT', 
+    fontSize=25, 
+    radius=20, 
+    onClick=lambda: run_algos())
+
+enable_size()
+disable_array()
+
+
+clock = pygame.time.Clock()
+running = True
+while running:
+    events = pygame.event.get()
+    for event in events:
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            running = False
+            quit()
+
+    # fill the screen with a color to wipe away anything from last frame
+    screen.fill("gray")
+
+    canvas_player(640, 180)
+    menu_listing(30, 50)
+    elements(30, 430)
+
+    pygame_widgets.update(events)  # Call once every loop to allow widgets to render and listen
+
+    pygame.display.flip()
+    clock.tick(60)  # limits FPS to 60
