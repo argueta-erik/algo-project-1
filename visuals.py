@@ -77,24 +77,34 @@ def elements(x, y):     # x = 30, y = 430
     # pygame.draw.rect(screen, "black", (x+245, y+40, 120, 50), 3)
     
 
-    # Option to fill in the array manually
-    pygame.draw.circle(screen, "black", (x, y+145), 15, 3)
-    pygame.draw.rect(screen, "black", (x+30, y+115, 320, 50), 3)
+    #  Displays the sorted array and status
+    if status == "idle":
+        pygame.draw.circle(screen, "black", (x, y+145), 15, 3)
+    elif status == "sorting":
+        pygame.draw.circle(screen, "yellow", (x, y+145), 15)
+    elif status == "complete":
+        pygame.draw.circle(screen, "green", (x, y+145), 15)
+    pygame.draw.rect(screen, "black", (30+30, 430+115, 320, 50), 3)
 
     # Submit Button
     pygame.draw.rect(screen, "green", (x+90, y+195, 150, 50), 5)
+
 
 def get_size():
     global arr_size
     arr_size = int(size_text.getText())
     return arr_size
 
+
 def get_array():
     global rand_select
     oof = arr_text.getText()
     return list(map(int, oof.split()))
     
+
 def run_algos():
+    global status
+    status = "sorting"
     if selected_method == "manual":
         main_arr = get_array()
 
@@ -117,6 +127,31 @@ def run_algos():
     time_lin = main.perform_linear_search(main_arr)
     linear_time_result.setText(f"{time_lin:.8f} second(s)")
 
+    oof = sorted_bub
+    status = "complete"
+    final_arr.setText(oof)
+
+
+def enable_size():
+    size_text.enable()
+    size_text.show()
+
+
+def disable_size():
+    size_text.disable()
+    size_text.hide()
+    size_text.setText("")
+
+
+def enable_array():
+    arr_text.enable()
+    arr_text.show()
+    
+
+def disable_array():
+    arr_text.disable()
+    arr_text.hide()
+    arr_text.setText("")
 
 #=============
 # PYGAME MAIN
@@ -125,9 +160,10 @@ pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 
 selected_algo = None
-selected_method = None
+selected_method = "random"
 arr_size = None
 rand_select = False
+status = "idle"
 
 def select_algo(name):
     global selected_algo
@@ -138,12 +174,12 @@ def select_method(name):
     selected_method = name
 
     if name == "random":
-        arr_text.disable()
-        size_text.enable()
-    
+        disable_array()
+        enable_size()
+
     elif name == "manual":
-        size_text.disable()
-        arr_text.enable()
+        disable_size()
+        enable_array()
 
 #===============
 # CANVAS PLAYER
@@ -217,9 +253,7 @@ linear_time_result.disable()
 #==========
 # ELEMENTS
 #==========
-# size_text -> 430-25
 size_text = TextBox(screen, 30+170, 430-25, 125, 50, placeholderText="Array Size", fontSize=25)
-
 
 rand_button = Button(
     screen, 
@@ -238,16 +272,19 @@ man_button = Button(
     )
 
 arr_text = TextBox(screen, 30+170, 430+40, 320, 50, placeholderText="1 2 3 4 5", fontSize=25)
+
+final_arr = TextBox(screen, 60, 545, 500, 150, fontSize=20)
+
 submit_btn = Button(
     screen, 
-    30+90, 430+195, 150, 50, 
+    575, 590, 150, 50, 
     text='SUBMIT', 
     fontSize=25, 
     radius=20, 
     onClick=lambda: run_algos())
 
-size_text.enable()
-arr_text.disable()
+enable_size()
+disable_array()
 
 
 clock = pygame.time.Clock()
