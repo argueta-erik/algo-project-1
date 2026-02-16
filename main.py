@@ -1,6 +1,5 @@
-import time     # import time module to measure duration functions
-import random   # import random module to genarate random input data for the algorithms
-import numpy as np
+import time
+import random
 
 # ===============
 # Time Function
@@ -22,13 +21,12 @@ def time_function(fn, arr, target=None):
 # Bubble Sort
 # ============
 def bubble_sort(arr):
-    a = arr[:]      # creates a temporary copy of the array for visualization
+    a = arr[:]
     n = len(a)
-    # n-1 to fit within the size of the array due to indices
     for i in range(n-1):
         for j in range(0, n-i-1):
             if a[j] > a[j + 1]:
-                a[j], a[j+1] = a[j+1], a[j] # swapping the value of the index
+                a[j], a[j+1] = a[j+1], a[j]
     return a
 
 # ============
@@ -37,9 +35,9 @@ def bubble_sort(arr):
 def merge_sort(arr):
     if len(arr) <= 1:
         return arr
-    mid = len(arr) // 2     # Divide and Conquer
-    left = merge_sort(arr[:mid])    # array from left to the midpoint
-    right = merge_sort(arr[mid:])   # array from right to the midpoint
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
 
     return merge(left, right)
 
@@ -47,7 +45,6 @@ def merge(left, right):
     result = []
     i = j = 0
     
-    # comparing both halves and merge
     while i < len(left) and j < len(right):
         if left[i] <= right[j]:
             result.append(left[i])
@@ -85,6 +82,8 @@ def quick_sort(arr):
 # Radix Sort
 # ============
 def radix_sort(arr):
+    if not arr:
+        return arr
     max_num = max(arr)
     exp = 1
     while max_num // exp > 0:
@@ -92,11 +91,10 @@ def radix_sort(arr):
         exp *= 10
     return arr
 
-# counting_sort_radix
 def counting_sort_radix(arr, exp):
     n = len(arr)
     output = [0] * n
-    count = [0] * 10    # hard coding the index values
+    count = [0] * 10
 
     for i in range(n):
         digit = (arr[i] // exp) % 10
@@ -181,7 +179,6 @@ def perform_radix_sort(arr, debug=False):
     return time_radix, sorted_radix
 
 def perform_linear_search(arr, debug=False):
-    # Linear Search
     print("\n\nLinear Search Algorithm")
     if debug == True:
         print("Given Array: ", arr)
@@ -204,14 +201,11 @@ def perform_linear_search(arr, debug=False):
     return time_linear
 
 def ask_size():
-    # Ask the user for the size of the array [May be needed if they decide to generate random values?]  
     return int(input(f"Please enter a size for the array.\n> "))
 
 def ask_yn(prompt):
-    # Asks user if they would like to use randomly generated values for their array
     while True:
             rand_choice = str(input(prompt))
-            # If the user enters strictly either 'n' 'N' 'y' 'Y'
             match rand_choice:
                 case 'y':
                     return True
@@ -222,19 +216,15 @@ def ask_yn(prompt):
                 case 'N':
                     return False
                 case _:
-                    # User did not enter valid options, continue to ask
                     print("\nPlease enter a valid option [y/n]")
 
 def set_array(size):
     while True:
-        # Asks user to enter values for the array
         print("Please type number to be entered into the arrray, separated by spaces.")
         print("For example:\n> 1 2 3 4 5 6")
         print("Array: [1, 2, 3, 4, 5, 6]")
         array_input = input("> ")
 
-        # returns a list (or array) after splitting the input by integers and spaces with map function
-        # error-prone, however, if user does not follow directions
         temp_arr = list(map(int, array_input.split()))
 
         if len(temp_arr) == size:
@@ -246,7 +236,7 @@ def set_array(size):
 # MAIN FUNCTION TO RUN ALL COMMANDS
 # ==================================
 def main():
-    arr_size = ask_size()        # do we need to ask to set array size?
+    arr_size = ask_size()
     print_choice = ask_yn("Would you like to see the array(s) printed out? [y/n] \n> ")
     rand_choice = ask_yn("Would you like to use random values? [y/n]\n> ")
     if rand_choice == False:
@@ -261,9 +251,5 @@ def main():
     perform_linear_search(user_array.copy(), print_choice)
     
 
-# main
 if __name__ == "__main__":
-
     main()
-    
-    
