@@ -54,8 +54,9 @@ def draw_visualization(x, y, width, height):
         # Get color for this bar
         color = visualization_colors[i] if i < len(visualization_colors) else COLOR_DEFAULT
         
-        # Draw the bar
-        pygame.draw.rect(screen, color, (bar_x, bar_y, bar_width - 2, bar_height))
+        # Draw the bar - use minimum width of 1 pixel
+        actual_bar_width = max(1, bar_width - 2)  # Ensure at least 1 pixel wide
+        pygame.draw.rect(screen, color, (bar_x, bar_y, actual_bar_width, bar_height))
         
     # Draw border
     pygame.draw.rect(screen, "black", (x, y, width, height), 3)
@@ -130,14 +131,25 @@ def elements(x, y):     # x = 30, y = 430
 
 def get_size():
     global arr_size
-    arr_size = int(size_text.getText())
-    return arr_size
+    try:
+        size_text_value = size_text.getText().strip()
+        if not size_text_value:
+            return None
+        arr_size = int(size_text_value)
+        return arr_size
+    except ValueError:
+        return None
 
 
 def get_array():
     global rand_select
-    oof = arr_text.getText()
-    return list(map(int, oof.split()))
+    try:
+        oof = arr_text.getText().strip()
+        if not oof:
+            return []
+        return list(map(int, oof.split()))
+    except ValueError:
+        return []
 
 
 # Generator functions for animated sorting
@@ -316,6 +328,11 @@ def start_visualization():
     global visualization_array, visualization_colors, visualization_running
     global sorting_steps, current_step, status
     
+    # Check if algorithm is selected
+    if not selected_algo:
+        print("Please select an algorithm first!")
+        return
+    
     status = "sorting"
     visualization_running = True
     current_step = 0
@@ -324,8 +341,18 @@ def start_visualization():
     # Get the array to sort
     if selected_method == "manual":
         arr = get_array()
+        if not arr:
+            print("Please enter valid numbers!")
+            status = "idle"
+            visualization_running = False
+            return
     elif selected_method == "random":
         size = get_size()
+        if not size or size <= 0:
+            print("Please enter a valid array size!")
+            status = "idle"
+            visualization_running = False
+            return
         arr = [random.randint(10, 100) for _ in range(size)]
     else:
         return
@@ -452,7 +479,11 @@ status = "idle"
 
 def select_algo(name):
     global selected_algo
-    selected_algo = name
+    # Toggle: if clicking same algorithm, deselect it
+    if selected_algo == name:
+        selected_algo = None
+    else:
+        selected_algo = name
 
 def select_method(name):
     global selected_method
@@ -479,23 +510,23 @@ fforward = Button(screen, 640+340, 180+340, 75, 50, text="Pause", onClick=pause_
 # Bubble Sort Listing
 bubble_text = Button(
     screen, 
-    60, 25, 200, 50, 
+    30+30, 50-25, 200, 50, 
     text='Bubble Sort', 
     fontSize=25, 
     onClick=lambda: select_algo("bubble")
     )
-bubble_time_result = TextBox(screen, 30+245, 50-25, 225, 50, fontSize=20)
+bubble_time_result = TextBox(screen, 30+245, 50-25, 225, 50, fontSize=14)
 
 
 # Merge Sort Listing
 merge_text = Button(
     screen, 
-    60, 95, 200, 50, 
+    30+30, 50+45, 200, 50, 
     text='Merge Sort', 
     fontSize=25, 
     onClick=lambda: select_algo("merge")
     )
-merge_time_result = TextBox(screen, 30+245, 50+45, 225, 50, fontSize=20)
+merge_time_result = TextBox(screen, 30+245, 50+45, 225, 50, fontSize=14)
 
 
 # Quick Sort Listing
@@ -506,7 +537,7 @@ quick_text = Button(
     fontSize=25, 
     onClick=lambda: select_algo("quick")
     )
-quick_time_result = TextBox(screen, 30+245, 50+115, 225, 50, fontSize=20)
+quick_time_result = TextBox(screen, 30+245, 50+115, 225, 50, fontSize=14)
 
 
 # Radix Sort Listing
@@ -517,7 +548,7 @@ radix_text = Button(
     fontSize=25, 
     onClick=lambda: select_algo("radix")
     )
-radix_time_result = TextBox(screen, 30+245, 50+185, 225, 50, fontSize=20)
+radix_time_result = TextBox(screen, 30+245, 50+185, 225, 50, fontSize=14)
 
 
 # Linear Search Listing
@@ -528,7 +559,7 @@ linear_text = Button(
     fontSize=25, 
     onClick=lambda: select_algo("linear")
     )
-linear_time_result = TextBox(screen, 30+245, 50+255, 225, 50, fontSize=20)
+linear_time_result = TextBox(screen, 30+245, 50+255, 225, 50, fontSize=14)
 
 #==========
 # ELEMENTS
